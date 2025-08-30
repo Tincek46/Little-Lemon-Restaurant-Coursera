@@ -1,13 +1,10 @@
 package com.tincek46.littlelemon.composables
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,9 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.content.edit
 import com.tincek46.littlelemon.R
-
 
 @Composable
 fun Onboarding() {
@@ -49,7 +44,7 @@ fun Onboarding() {
         // Static Text
         Text(
             text = "Let's get to know you",
-            style = MaterialTheme.typography.headlineSmall, // Changed from h4 to Material 3 equivalent
+            style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier
                 .padding(bottom = 32.dp)
                 .align(Alignment.Start)
@@ -90,26 +85,30 @@ fun Onboarding() {
                 if (firstName.isNotBlank() && lastName.isNotBlank() && email.contains("@")) {
                     // Save user data using SharedPreferences
                     val sharedPreferences = context.getSharedPreferences("LittleLemonPrefs", Context.MODE_PRIVATE)
-                    sharedPreferences.edit {
+                    with(sharedPreferences.edit()) {
                         putString("firstName", firstName)
                         putString("lastName", lastName)
                         putString("email", email)
-                        // apply() is called automatically by the KTX extension
+                        apply()
                     }
+
+                    // Log the saved data
+                    Log.d("Onboarding", "First Name: $firstName")
+                    Log.d("Onboarding", "Last Name: $lastName")
+                    Log.d("Onboarding", "Email: $email")
+                } else {
+                    Log.d("Onboarding", "Invalid input data")
                 }
             },
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Yellow, // Material 3 way to set background
-                contentColor = Color.Black    // Material 3 way to set text color
+                containerColor = Color.Yellow,
+                contentColor = Color.Black
             ),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp)
         ) {
-            Text(
-                text = "Register",
-                style = MaterialTheme.typography.labelLarge // Changed from button to Material 3 equivalent
-            )
+            Text(text = "Register")
         }
     }
 }
