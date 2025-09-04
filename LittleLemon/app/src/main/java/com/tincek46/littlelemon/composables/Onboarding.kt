@@ -10,11 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.tincek46.littlelemon.R
-import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun Onboarding(navController: NavController) {
@@ -98,23 +96,12 @@ fun Onboarding(navController: NavController) {
                     navController.navigate("home")
                 }
             },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Yellow,
-                contentColor = Color.Black
-            ),
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Yellow, contentColor = Color.Black),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp)
         ) {
             Text(text = "Register")
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun OnboardingPreview() {
-    MaterialTheme {
-        // Onboarding(navController = rememberNavController()) // Uncomment if you want to preview
     }
 }
