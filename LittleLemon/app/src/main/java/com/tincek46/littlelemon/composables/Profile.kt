@@ -1,100 +1,193 @@
 package com.tincek46.littlelemon.composables
 
 import android.content.Context
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.shape.RoundedCornerShape // Added for RoundedCornerShape
+import androidx.compose.foundation.text.selection.TextSelectionColors // Added for TextSelectionColors
+import androidx.compose.material.icons.Icons // Added for Icons
+import androidx.compose.material.icons.filled.Email // Added for Email icon
+import androidx.compose.material.icons.filled.Person // Added for Person icon
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.content.edit
 import androidx.navigation.NavController
-import com.tincek46.littlelemon.R
+import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun Profile(navController: NavController) {
     val context = LocalContext.current
     val sharedPreferences = context.getSharedPreferences("LittleLemonPrefs", Context.MODE_PRIVATE)
-    val firstName = sharedPreferences.getString("firstName", "") ?: ""
-    val lastName = sharedPreferences.getString("lastName", "") ?: ""
-    val email = sharedPreferences.getString("email", "") ?: ""
+    val firstName = sharedPreferences.getString("firstName", "N/A") ?: "N/A"
+    val lastName = sharedPreferences.getString("lastName", "N/A") ?: "N/A"
+    val email = sharedPreferences.getString("email", "N/A") ?: "N/A"
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Header with Logo
-        Image(
-            painter = painterResource(id = R.drawable.logo),
-            contentDescription = "Little Lemon Logo",
-            modifier = Modifier
-                .size(100.dp)
-                .padding(top = 32.dp, bottom = 32.dp)
-        )
+        StandardAppHeader(navController = navController) 
 
-        // Personal Information Section
         Text(
-            text = "Personal information",
+            text = "Profile information:", 
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier
                 .align(Alignment.Start)
-                .padding(bottom = 16.dp)
+                .padding(top = 16.dp, bottom = 24.dp) 
         )
 
-        // User Data as OutlinedTextField (read-only)
         Column(
             modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalAlignment = Alignment.Start
         ) {
-            OutlinedTextField(
+            val subtleGray = Color(0xFFF5F5F5)
+            val blackColor = Color.Black
+
+            TextField(
                 value = firstName,
                 onValueChange = {},
                 label = { Text("First name") },
+                leadingIcon = { Icon(Icons.Filled.Person, contentDescription = "Person Icon") }, 
                 readOnly = true,
-                modifier = Modifier.fillMaxWidth()
+                enabled = true, 
+                shape = RoundedCornerShape(12.dp),
+                colors = TextFieldDefaults.colors(
+                    focusedTextColor = blackColor,
+                    unfocusedTextColor = blackColor,
+                    disabledTextColor = blackColor, 
+                    cursorColor = Color.Transparent,
+                    selectionColors = TextSelectionColors(handleColor = Color.Transparent, backgroundColor = Color.Transparent),
+                    focusedContainerColor = subtleGray,
+                    unfocusedContainerColor = subtleGray,
+                    disabledContainerColor = subtleGray,
+                    focusedIndicatorColor = blackColor, // Underline color
+                    unfocusedIndicatorColor = blackColor, // Underline color
+                    disabledIndicatorColor = blackColor, // Underline color
+                    focusedLabelColor = blackColor,
+                    unfocusedLabelColor = blackColor,
+                    disabledLabelColor = blackColor,
+                    focusedLeadingIconColor = blackColor, 
+                    unfocusedLeadingIconColor = blackColor, 
+                    disabledLeadingIconColor = blackColor 
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp)
             )
 
-            OutlinedTextField(
+            TextField(
                 value = lastName,
                 onValueChange = {},
                 label = { Text("Last name") },
+                leadingIcon = { Icon(Icons.Filled.Person, contentDescription = "Person Icon") }, 
                 readOnly = true,
-                modifier = Modifier.fillMaxWidth()
+                enabled = true, 
+                shape = RoundedCornerShape(12.dp),
+                colors = TextFieldDefaults.colors(
+                    focusedTextColor = blackColor,
+                    unfocusedTextColor = blackColor,
+                    disabledTextColor = blackColor,
+                    cursorColor = Color.Transparent,
+                    selectionColors = TextSelectionColors(handleColor = Color.Transparent, backgroundColor = Color.Transparent),
+                    focusedContainerColor = subtleGray,
+                    unfocusedContainerColor = subtleGray,
+                    disabledContainerColor = subtleGray,
+                    focusedIndicatorColor = blackColor, // Underline color
+                    unfocusedIndicatorColor = blackColor, // Underline color
+                    disabledIndicatorColor = blackColor, // Underline color
+                    focusedLabelColor = blackColor,
+                    unfocusedLabelColor = blackColor,
+                    disabledLabelColor = blackColor,
+                    focusedLeadingIconColor = blackColor, 
+                    unfocusedLeadingIconColor = blackColor, 
+                    disabledLeadingIconColor = blackColor
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp)
             )
 
-            OutlinedTextField(
+            TextField(
                 value = email,
                 onValueChange = {},
                 label = { Text("Email") },
+                leadingIcon = { Icon(Icons.Filled.Email, contentDescription = "Email Icon") }, 
                 readOnly = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-                modifier = Modifier.fillMaxWidth()
+                enabled = true, 
+                shape = RoundedCornerShape(12.dp),
+                colors = TextFieldDefaults.colors(
+                    focusedTextColor = blackColor,
+                    unfocusedTextColor = blackColor,
+                    disabledTextColor = blackColor,
+                    cursorColor = Color.Transparent,
+                    selectionColors = TextSelectionColors(handleColor = Color.Transparent, backgroundColor = Color.Transparent),
+                    focusedContainerColor = subtleGray,
+                    unfocusedContainerColor = subtleGray,
+                    disabledContainerColor = subtleGray,
+                    focusedIndicatorColor = blackColor, // Underline color
+                    unfocusedIndicatorColor = blackColor, // Underline color
+                    disabledIndicatorColor = blackColor, // Underline color
+                    focusedLabelColor = blackColor,
+                    unfocusedLabelColor = blackColor,
+                    disabledLabelColor = blackColor,
+                    focusedLeadingIconColor = blackColor, 
+                    unfocusedLeadingIconColor = blackColor, 
+                    disabledLeadingIconColor = blackColor
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp) 
             )
         }
+        
+        Spacer(modifier = Modifier.weight(1f)) 
 
-        // Logout Button
-        Spacer(modifier = Modifier.weight(1f))
-        Button(
-            onClick = {
-                sharedPreferences.edit().clear().apply()
-                navController.navigate("onboarding") {
-                    popUpTo("home") { inclusive = true }
-                }
-            },
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Yellow, contentColor = Color.Black),
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp)
+                .padding(vertical = 8.dp), 
+            horizontalArrangement = Arrangement.spacedBy(8.dp) 
         ) {
-            Text(text = "Log out")
+            Button(
+                onClick = {
+                    navController.popBackStack() 
+                },
+                modifier = Modifier
+                    .weight(1f)
+                    .height(50.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
+            ) {
+                Text(text = "Go Back")
+            }
+
+            Button(
+                onClick = {
+                    sharedPreferences.edit { clear() }
+                    navController.navigate("onboarding") {
+                        popUpTo("home") { inclusive = true }
+                    }
+                },
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF4CE14), contentColor = Color.Black),
+                modifier = Modifier
+                    .weight(1f)
+                    .height(50.dp)
+            ) {
+                Text(text = "Log out")
+            }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ProfilePreview() {
+    val navController = rememberNavController()
+    Profile(navController = navController)
 }
