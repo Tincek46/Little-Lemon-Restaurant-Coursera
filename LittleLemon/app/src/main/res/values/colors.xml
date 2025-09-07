@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Color definitions are primarily managed in ui.theme.Color.kt for Compose. -->
+    <!-- This file can be kept for system-level colors if needed outside of Compose, -->
+    <!-- or for colors used by the base Android theme before Compose takes over. -->
+</resources>

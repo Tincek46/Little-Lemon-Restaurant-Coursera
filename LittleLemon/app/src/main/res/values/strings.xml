@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">LittleLemon</string>
+    <string name="onboarding_title">Let\'s get to know you</string>
+    <string name="label_first_name">First name</string>
+    <string name="label_last_name">Last name</string>
+    <string name="label_email">Email</string>
+    <string name="error_registration_incomplete">Registration unsuccessful. Please enter all data.</string>
+    <string name="error_invalid_email_format">Invalid email format. Please enter a valid email.</string>
+    <string name="success_registration">Registration successful!</string>
+    <string name="button_register">Register</string>
+    <string name="error_email_required_login">Email address is required to log in.</string>
+    <string name="error_invalid_email_login">Invalid email format for log in.</string>
+    <string name="success_login">Log in successful!</string>
+    <string name="error_login_failed_not_registered">Log in failed. Email not registered.</string>
+    <string name="button_login">Log In</string>
+
+    <!-- Strings for Home.kt -->
+    <string name="home_order_for_delivery">ORDER FOR DELIVERY!</string>
+    <string name="hero_title">Little Lemon</string>
+    <string name="hero_location_chicago">Chicago</string>
+    <string name="hero_description_text">We are a family-owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.</string>
+    <string name="cd_hero_image">Little Lemon Hero Image</string>
+    <string name="label_search_hero">Enter search phrase</string>
+    <string name="cd_search_icon">Search</string>
+    <string name="price_format">$%s</string>
+    <string name="cd_menu_item_image">%s image</string>
+
+    <!-- Strings for Profile.kt -->
+    <string name="text_not_available">N/A</string>
+    <string name="profile_information_title">Profile information:</string>
+    <string name="cd_person_icon">Person Icon</string>
+    <string name="cd_email_icon">Email Icon</string>
+    <string name="button_go_back">Go Back</string>
+    <string name="button_log_out">Log out</string>
+
+    <!-- Strings for CommonUi.kt -->
+    <string name="cd_little_lemon_logo">Little Lemon Logo</string>
+    <string name="cd_profile_icon">Profile</string>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.LittleLemon" parent="android:Theme.Material.Light.NoActionBar">
+        <!-- Set status bar color - using the hex value of LittleLemonGreen -->
+        <item name="android:statusBarColor">#FF495E57</item>
+    </style>
+</resources>
