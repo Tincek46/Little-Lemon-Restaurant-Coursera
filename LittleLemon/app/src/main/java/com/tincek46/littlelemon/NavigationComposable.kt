@@ -9,14 +9,18 @@ import androidx.navigation.compose.rememberNavController
 import com.tincek46.littlelemon.composables.Home
 import com.tincek46.littlelemon.composables.Onboarding
 import com.tincek46.littlelemon.composables.Profile
+// Import centralized SharedPreferences constants
+import com.tincek46.littlelemon.PREFS_NAME
+import com.tincek46.littlelemon.KEY_IS_LOGGED_IN
 
 @Composable
-fun NavigationComposable(menuItems: List<MenuItemEntity>) { // Added menuItems parameter
+fun NavigationComposable(menuItems: List<MenuItemEntity>) {
     val navController = rememberNavController()
     val context = LocalContext.current
-    val sharedPreferences = context.getSharedPreferences("LittleLemonPrefs", Context.MODE_PRIVATE)
+    val sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+
     // Determine start destination based on whether user details are saved
-    val startDestination = if (sharedPreferences.getBoolean("isLoggedIn", false)) { // Assuming 'isLoggedIn' or similar key indicates user has completed onboarding
+    val startDestination = if (sharedPreferences.getBoolean(KEY_IS_LOGGED_IN, false)) {
         Home.route
     } else {
         Onboarding.route
@@ -24,7 +28,7 @@ fun NavigationComposable(menuItems: List<MenuItemEntity>) { // Added menuItems p
 
     NavHost(navController = navController, startDestination = startDestination) {
         composable(Onboarding.route) { Onboarding(navController) }
-        composable(Home.route) { Home(navController, menuItems) } // Pass menuItems to Home
+        composable(Home.route) { Home(navController, menuItems) } 
         composable(Profile.route) { Profile(navController) }
     }
 }
